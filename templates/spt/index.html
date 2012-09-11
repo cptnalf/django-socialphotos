@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+
+{% block title %}All Photos{% endblock %}
+
+{% block content %}
+
+{% if photos %}
+<div class="inlinecontainer">
+    {% for p in photos %}
+      <div class="inlineblock">
+				<div class="imgurl"><a href="/media/photos/{{ p.path }}"><img src="/media/photos/thumbs/{{ p.path }}" alt="{{ p.slug }}" /></a></div>
+				<div class="imgtitle">foo title!</div>
+				<div class="small">foo information!</div>
+			</div>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
+

@@ -1,0 +1,64 @@
+
+{% extends "base.html" %}
+
+{% block title %}Photo {{ p.slug }}{% endblock %}
+
+{% block content %}
+
+{% if photo %}
+<div class="img-area">
+	<div class="display-image">
+		<div class="image-info-block">
+			<div class="img-url"><a href="/media/photos/{{ photo.path }}"><img width="600" src="/media/photos/{{ photo.path }}" /></a></div>
+		</div>
+	</div>
+  {% for up in userphotos %}
+	<div class="useradds">
+		<table>
+			<tr><td rowspan="3"><img src="/media/noone.jpg" /></td>
+				<td><span class="user">{{ up.user.first_name }} {{ up.user.last_name }}</span></td>
+			</tr>
+			<tr><td>
+					<div class="tags-container">
+						<div class="tags">
+							{% for t in up.tags.all %}
+							<div style="block"><a class="tags" href="{% url spt.views.tag_detail tag_slug=t.slug %}">{{ t.starType }}:{{ t.name }}</a></div>
+{% comment %}
+					<!--
+					<div class="tags-container">
+						Roll
+						<div class="tags"><a class="tag" href="/tags/roll:136">136</a></div>
+					</div>
+					<div class="tags-container">Frame<div class="tags"><a class="tag" href="/tags/frame/001">001</a></div></div>
+					<div class="tags-container">Camera<div class="tags"><a class="tag">Canon 7ne</a></div></div>
+					<div class="tags-container">Lens<div class="tags"><a class="tag">EF-50mm 1.4 USM</a></div></div>
+					<div class="tags-container">Film<div class="tags"><a class="tag">Fuji 35mm ISO800 Color Negative</a></div></div>
+				-->
+{% endcomment %}
+							{% endfor %}
+						</div>
+					</div>
+				</td>
+			</tr>
+			{% if up.user.username == lu.username %}
+			<tr>
+				<td>
+					<form action="{{ request.path }}" method="post">{% csrf_token %}
+						{{ form.as_p }}
+						<div><input type="submit" /></div>
+					</form>
+				</td>
+			</tr>
+			{% endif %}
+		</table>
+	</div>
+	{% empty %}
+	<div class="useradds">
+	</div>
+  {% endfor %}
+	
+</div>
+{% endif %}
+
+{% endblock %}
+

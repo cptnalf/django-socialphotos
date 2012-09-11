@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+
+{% block title %}Tag {{ tag.name }}{% endblock %}
+
+{% block content %}
+
+<div class="img-area">
+  <div>{{ t.name }}</div>
+	<div>
+		{% for at in photos %}
+		<div>
+			<a href="{% url spt.views.photo_detail at.slug %}"><img src="/media/photos/thumbs/{{ at.path }}" /></a>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+	
+{% endblock %}
+

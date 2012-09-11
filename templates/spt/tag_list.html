@@ -1,0 +1,15 @@
+
+{% extends "base.html" %}
+
+{% block title %}All Photos{% endblock %}
+
+{% block content %}
+
+{% if tags %}
+<div class="inlinecontainer">
+  {% for t in tags %}<div><a href="{% url 'spt.views.tag_detail' t.slug %}">{{ t.name }}</a></div>{% endfor %}
+</div>
+{% endif %}
+	
+{% endblock %}
+
